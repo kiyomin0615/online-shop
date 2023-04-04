@@ -1,0 +1,38 @@
+<%- include("../includes/head", {pageTitle: "Signup"}) %>
+</head>
+
+<body>
+  <%- include("../includes/header") %>
+  <main>
+    <h1>회원가입</h1>
+    <form action="" method="">
+      <p class="form-control">
+        <label for="email">이메일</label>
+        <input type="email" id="email" name="email" required>
+      </p>
+      <p class="form-control">
+        <label for="confirm-email">이메일 확인</label>
+        <input type="email" id="confirm-email" name="confirm-email" required>
+      </p>
+      <p class="form-control">
+        <label for="password">비밀번호</label>
+        <input type="password" id="password" name="password" required minlength="6">
+      </p>
+      <hr />
+      <p class="form-control">
+        <label for="fullname">이름</label>
+        <input type="text" id="fullname" name="fullname" required>
+      </p>
+      <p class="form-control">
+        <label for="address">주소</label>
+        <input type="text" id="address" name="address" required>
+      </p>
+      <p class="form-control">
+        <label for="postal">우편번호</label>
+        <input type="text" id="postal" name="postal" required minlength="5" maxlength="6">
+      </p>
+      <button class="btn">계정 생성</button>
+      <p id="switch"><a href="/login">로그인하러 가기</a></p>
+    </form>
+  </main>
+<%- include("../includes/footer") %>
