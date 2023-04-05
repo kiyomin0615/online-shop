@@ -4,15 +4,15 @@ const express = require("express");
 const csrf = require("csurf");
 const expressSession = require("express-session");
 
-const createSessionConfig = require("./config/session");
 const database = require("./data/database");
-const addCsrfTokenMiddleware = require("./middlewares/csrf-token");
+const sessionConfig = require("./config/session-config");
+const addCsrfTokenMiddleware = require("./middlewares/add-csrf-token");
 const errorHandlerMiddleware = require("./middlewares/error-handler");
+const checkAuthMiddleware = require("./middlewares/check-auth");
 
+const baseRoutes = require("./routes/base.routes");
 const authRoutes = require("./routes/auth.routes");
 const productsRoutes = require("./routes/products.routes");
-const baseRoutes = require("./routes/base.routes");
-
 
 const app = express();
 
@@ -22,8 +22,8 @@ app.set("views", path.join(__dirname, "views"));
 app.use(express.static("public"));
 app.use(express.urlencoded({extended: false}));
 
-app.use(expressSession(createSessionConfig())); // 세션 생성
-
+app.use(expressSession(sessionConfig())); // 세션 생성
+app.use(checkAuthMiddleware); // 해당 유저가 로그인 상태인지 아닌지 확인
 app.use(csrf()); // CSRF 토큰이 없는 POST 요청은 거부한다
 app.use(addCsrfTokenMiddleware); // CSRF 토큰을 전역 변수 res.locals에 저장
 

@@ -1,4 +1,5 @@
 const User = require("../models/user.model");
+const authentication = require("../util/authentication");
 const utilAuthentication =  require("../util/authentication")
 
 function getSignup(req, res) {
@@ -50,16 +51,22 @@ async function login(req, res) {
   }
 
   // 3. 로그인 성공
-  // 홈 페이지로 이동
+  // 유저 세션 생성
   utilAuthentication.createUserSession(req, existingUser, function() {
     res.redirect("/");
   });
+}
 
+function logout(req, res) {
+  // 유저 세션 제거
+  utilAuthentication.destroyUserAuthSession(req);
+  res.redirect("/");
 }
 
 module.exports = {
   getSignup: getSignup,
   getLogin: getLogin,
   signup: signup,
-  login: login
+  login: login,
+  logout: logout
 }
