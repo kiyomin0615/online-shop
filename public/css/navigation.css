@@ -1,0 +1,138 @@
+main {
+  margin-top: 6rem;
+}
+
+#main-header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  max-width: 60rem;
+  height: 5rem;
+  margin: 0 auto;
+  padding: 0 var(--space-6);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid var(--color-primary-500);
+  background-color: var(--color-gray-500);
+}
+
+#logo a {
+  font-weight: bold;
+  font-size: 2rem;
+}
+
+#main-header nav {
+  display: none;
+}
+
+.nav-list {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.nav-list li {
+  margin: 0 var(--space-2);
+}
+
+.nav-list button {
+  cursor: pointer;
+  font: inherit;
+  border: 1px solid var(--color-primary-100);
+  border-radius: var(--border-radius-small);
+  background-color: transparent;
+  padding: var(--space-2) var(--space-4);
+}
+
+#mobile-menu-btn {
+  display: flex;
+  flex-direction: column;;
+  justify-content: space-around;
+  border: none;
+  cursor: pointer;
+  width: 2.25rem;
+  height: 2.25rem;
+  background-color: transparent;
+  padding: 0;
+}
+
+#mobile-menu-btn span {
+  width: 2.25rem;
+  height: .2rem;
+  background-color: var(--color-gray-100);
+}
+
+#mobile-menu {
+  position: fixed;
+  top: 5rem;
+  left: 0;
+  width: 100%;
+  height: calc(100vh - 5rem);
+  background-color: var(--color-gray-700);
+  display: none;
+  flex-direction: column;
+  align-items: center;
+}
+
+#mobile-menu.open {
+  display: flex;
+}
+
+#mobile-menu nav {
+  width: 90%;
+  height: 20rem;
+  margin: var(--space-4) auto;
+}
+
+#mobile-menu .nav-list a,
+#mobile-menu .nav-list button {
+  font-size: 1.75rem;
+  color: var(--color-primary-100);
+}
+
+
+/* PC 버전 반응형 */
+@media (min-width: 48rem) {
+  main {
+    margin-top: 0;
+  }
+
+  #main-header {
+    position: static;
+  }
+
+  #main-header nav {
+    display: block;
+  }
+
+  #mobile-menu-btn {
+    display: none;
+  }
+
+  #mobile-menu {
+    display: none;
+  }
+
+  .nav-list {
+    flex-direction: row;
+  }
+
+  .nav-list a {
+    padding: var(--space-2) var(--space-4);
+    border-radius: var(--border-radius-small);
+  }
+
+  .nav-list a:hover,
+  .nav-list a:active {
+    background-color: var(--color-primary-500-bg);
+  }
+
+  .nav-list button {
+    color: var(--color-primary-500);
+    border-color: var(--color-primary-500);
+  }
+}
