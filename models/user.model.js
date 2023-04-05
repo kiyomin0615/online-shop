@@ -14,9 +14,20 @@ class User {
     }
   }
 
-  // 데이터베이스에서 해당 이메일의 유저가 회원가입 됐는지 확인
+  // 데이터베이스에서 해당 이메일의 유저를 가져오기
   getUserWithSameEmail() {
     return database.getDb().collection("users").findOne({email: this.email});
+  }
+
+  // 데이터베이스에서 해당 이메일의 유저가 회원가입 됐는지 확인
+  async existsAlready() {
+    const existingUser = await this.getUserWithSameEmail()
+    
+    if (existingUser) {
+      return true;
+    } else {
+      return false;
+    }
   }
   
   // 입력한 비밀번호와 데이터베이스에 저장된 비밀번호 비교
