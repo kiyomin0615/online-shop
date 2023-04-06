@@ -1,0 +1,24 @@
+<%- include("../../shared/includes/head", {pageTitle: "All Products"}) %>
+</head>
+
+<body>
+<%- include("../../shared/includes/header") %>
+<main>
+  <h1>관리자 모드</h1>
+  <section>
+    <h2>관리</h2>
+    <p>
+      <a href="/admin/products/new" class="btn">상품 추가</a>
+    </p>
+  </section>
+  <section>
+    <ul>
+      <% for (let product of products) { %>
+      <li>
+        <%- include("../../shared/includes/product-item", {product: product}) %>
+      </li>
+      <% } %>
+    </ul>
+  </section>
+</main>
+<%- include("../../shared/includes/footer") %>

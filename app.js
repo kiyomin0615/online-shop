@@ -13,6 +13,7 @@ const checkAuthMiddleware = require("./middlewares/check-auth");
 const baseRoutes = require("./routes/base.routes");
 const authRoutes = require("./routes/auth.routes");
 const productsRoutes = require("./routes/products.routes");
+const adminRoutes = require("./routes/admin.routes");
 
 const app = express();
 
@@ -20,6 +21,7 @@ app.set("view engine", "ejs");
 app.set("views", path.join(__dirname, "views"));
 
 app.use(express.static("public"));
+app.use("/products/assets", express.static("product-data"))
 app.use(express.urlencoded({extended: false}));
 
 app.use(expressSession(sessionConfig())); // 세션 생성
@@ -30,6 +32,7 @@ app.use(addCsrfTokenMiddleware); // CSRF 토큰을 전역 변수 res.locals에 �
 app.use(baseRoutes);
 app.use(authRoutes);
 app.use(productsRoutes);
+app.use("/admin", adminRoutes); // 라우트의 경로에서 "/admin" 생략하기 위해서
 
 app.use(errorHandlerMiddleware); // 에러가 발생하면 express에 의해서 자동으로 호출된다
 
