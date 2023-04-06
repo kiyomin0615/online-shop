@@ -1,0 +1,42 @@
+<%- include("../../shared/includes/head", {pageTitle: "Update Product"}) %>
+<link rel="stylesheet" href="/css/forms.css">
+<script src="/js/image-preview.js" defer></script>
+</head>
+
+<body>
+<%- include("../../shared/includes/header") %>
+<main>
+  <h1>상품 수정</h1>
+  <!-- URL 쿼리 스트링을 통해서 토큰 전송 -->
+  <form action="<%= submitPath %>?_csrf=<%= locals.csrfToken %>" method="POST" enctype="multipart/form-data">
+    <!-- <input type="hidden" name="_csrf" value=""> -->
+    <p class="form-control">
+      <label for="title">상품 제목</label>
+      <input type="text" id="title" name="title" required value="<%= product.title %>">
+    </p>
+    <div id="image-upload-control">
+      <p class="form-control">
+        <label for="image">상품 이미지</label>
+        <input type="file" id="image" name="image" required accept="image/jpg, image/png">
+      </p>
+      <img src="" alt="선택한 이미지">
+    </div>
+    <p class="form-control">
+      <label for="summary">상품 요약</label>
+      <input type="text" id="summary" name="summary" required maxlength="250" value="<%= product.summary %>">
+    </p>
+    <p class="form-control">
+      <label for="price">상품 가격</label>
+      <input type="number" id="price" name="price" required min="1000" step="1000" value="<%= product.price %>">
+    </p>
+    <p class="form-control">
+      <label for="description">상품 설명</label>
+      <textarea name="description" id="description" rows="7" required><%= product.description %></textarea>
+    </p>
+    <p class="form-control">
+      <button type="reset" class="btn btn-alt">초기화</button>
+      <button type="submit" class="btn">저장</button>
+    </p>
+  </form>
+</main>
+<%- include("../../shared/includes/footer") %>

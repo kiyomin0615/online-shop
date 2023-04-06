@@ -32,8 +32,54 @@ async function createNewProduct(req, res) {
   res.redirect("/admin/products");
 }
 
+async function getUpdateProduct(req, res, next) {
+  try {
+    const product = await Product.findById(req.params.id);
+    res.render("/admin/products/update-product", {product: product});
+  } catch (error) {
+    next(error);
+  }
+}
+
+async function updateProduct(req, res, next) {
+  const product = new Product({
+    ...req.body,
+    _id: req.params.id,
+  });
+
+  if (req.file) {
+    product.replaceImage(req.file.filename);
+  }
+
+  try {
+    await product.save();
+  } catch (error) {
+    next(error);
+    return;
+  }
+
+  res.redirect("/admin/products");
+}
+
+async function deleteProduct(req, res, next) {
+  let product;
+
+  try {
+    product = await Product.findById(req.params.id);
+    await product.remove();
+  } catch (error) {
+    next(error);
+    return;
+  }
+
+  res.json({message: "상품 삭제 완료!"});
+}
+
 module.exports = {
   getProducts: getProducts,
   getNewProduct: getNewProduct,
-  createNewProduct: createNewProduct
+  createNewProduct: createNewProduct,
+  getUpdateProduct: getUpdateProduct,
+  updateProduct: updateProduct,
+  deleteProduct: deleteProduct
 }
