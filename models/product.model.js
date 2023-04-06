@@ -7,7 +7,7 @@ class Product {
     this.title = productData.title,
     this.summary = productData.summary,
     this.price = +productData.price, // string to number
-    this.description = product.description,
+    this.description = productData.description,
     this.image = productData.image // 이미지 파일 이름
     this.imagePath = `product-data/images/${this.image}`;
     this.imageURL = `/products/assets/images/${this.image}`; // 프로젝트 경로에 대한 힌트를 주지 않기 위해서

@@ -6,7 +6,7 @@ async function deleteProduct(event) {
   const csrfToken = deleteProductBtnEl.dataset.csrfToken;
 
   // fetch(path, configuration)
-  const res = await fetch(`/admin/product/${productId}/?_csrf="${csrfToken}"`, {
+  const res = await fetch(`/admin/product/${productId}/?_csrf=${csrfToken}`, {
     method: "DELETE", // DELETE Request
   });
 

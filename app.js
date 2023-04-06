@@ -9,6 +9,7 @@ const sessionConfig = require("./config/session-config");
 const addCsrfTokenMiddleware = require("./middlewares/add-csrf-token");
 const errorHandlerMiddleware = require("./middlewares/error-handler");
 const checkAuthMiddleware = require("./middlewares/check-auth");
+const protectRoutesMiddleware = require("./middlewares/protect-routes");
 
 const baseRoutes = require("./routes/base.routes");
 const authRoutes = require("./routes/auth.routes");
@@ -32,6 +33,7 @@ app.use(addCsrfTokenMiddleware); // CSRF 토큰을 전역 변수 res.locals에 �
 app.use(baseRoutes);
 app.use(authRoutes);
 app.use(productsRoutes);
+app.use(protectRoutesMiddleware); // 라우트 보호
 app.use("/admin", adminRoutes); // 라우트의 경로에서 "/admin" 생략하기 위해서
 
 app.use(errorHandlerMiddleware); // 에러가 발생하면 express에 의해서 자동으로 호출된다

@@ -8,7 +8,7 @@
 <main>
   <h1>상품 수정</h1>
   <!-- URL 쿼리 스트링을 통해서 토큰 전송 -->
-  <form action="<%= submitPath %>?_csrf=<%= locals.csrfToken %>" method="POST" enctype="multipart/form-data">
+  <form action="/admin/products/<%= product.id %>?_csrf=<%= locals.csrfToken %>" method="POST" enctype="multipart/form-data">
     <!-- <input type="hidden" name="_csrf" value=""> -->
     <p class="form-control">
       <label for="title">상품 제목</label>
