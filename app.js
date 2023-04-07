@@ -16,6 +16,7 @@ const baseRoutes = require("./routes/base.routes");
 const authRoutes = require("./routes/auth.routes");
 const productsRoutes = require("./routes/products.routes");
 const adminRoutes = require("./routes/admin.routes");
+const cartRoutes = require("./routs/cart.routes");
 
 const app = express();
 
@@ -25,6 +26,7 @@ app.set("views", path.join(__dirname, "views"));
 app.use(express.static("public"));
 app.use("/products/assets", express.static("product-data"))
 app.use(express.urlencoded({extended: false}));
+app.use(express.json()); // JSON 데이터 분석(parse)
 
 app.use(expressSession(sessionConfig())); // 세션 생성
 app.use(cartMiddleware); // 유저의 장바구니 생성
@@ -35,6 +37,7 @@ app.use(checkAuthMiddleware); // 해당 유저가 로그인 상태인지 아닌�
 app.use(baseRoutes);
 app.use(authRoutes);
 app.use(productsRoutes);
+app.use(cartRoutes); // 라우트의 경로에서 "/cart" 생략하기 위해서
 app.use(protectRoutesMiddleware); // 라우트 보호
 app.use("/admin", adminRoutes); // 라우트의 경로에서 "/admin" 생략하기 위해서
 

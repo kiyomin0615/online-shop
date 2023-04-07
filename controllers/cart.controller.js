@@ -15,7 +15,7 @@ async function addCartItem(req, res) {
   res.status(201).json({
     message: "장바구니에 상품이 추가됐습니다.",
     totalQuantity: res.locals.cart.totalQuantity
-  })
+  });
 }
 
 module.exports = {
