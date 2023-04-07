@@ -1,5 +1,9 @@
 const Product = require("../models/product.model");
 
+function getCart(req, res) {
+  res.render("customer/cart/cart");
+}
+
 async function addCartItem(req, res) {
   let product;
   try {
@@ -18,6 +22,22 @@ async function addCartItem(req, res) {
   });
 }
 
+function updateCartItem(req, res) {
+  const cart = res.locals.cart;
+  const updatedItemData = cart.updateItem(req.body.productId, req.body.quantity);
+
+  req.session.cart = cart;
+
+  res.json({
+    message: "상품의 수량이 변경됐습니다.",
+    newTotalQuantity: cart.totalQuantity,
+    newTotalPrice: cart.totalPrice,
+    updatedItemPrice: updatedItemData.updatedItemPrice
+  });
+}
+
 module.exports = {
-  addCartItem: addCartItem
+  getCart: getCart,
+  addCartItem: addCartItem,
+  updateCartItem: updateCartItem
 }

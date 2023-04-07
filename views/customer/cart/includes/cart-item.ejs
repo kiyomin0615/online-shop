@@ -1,0 +1,10 @@
+<article class="cart-item">
+  <div class="cart-item-info">
+    <h2><%= item.product.title %></h2>
+    <p><span class="cart-item-price"><%= item.totalPrice %></span> 원 <span class="cart-item-price">(<%= item.product.price %> 원)</span></p>
+  </div>
+  <form class="cart-item-management" data-productId="<%= item.product.id %>" data-csrfToken="<%= locals.csrfToken %>">
+    <input type="number" required value="<%= item.quantity %>">
+    <button>변경</button>
+  </form>
+</article>

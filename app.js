@@ -16,7 +16,7 @@ const baseRoutes = require("./routes/base.routes");
 const authRoutes = require("./routes/auth.routes");
 const productsRoutes = require("./routes/products.routes");
 const adminRoutes = require("./routes/admin.routes");
-const cartRoutes = require("./routs/cart.routes");
+const cartRoutes = require("./routes/cart.routes");
 
 const app = express();
 

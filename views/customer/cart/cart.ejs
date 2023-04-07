@@ -1,0 +1,22 @@
+<%- include("../../shared/includes/head", {pageTitle: "Cart"}) %>
+<link rel="stylesheet" href="/css/cart.css">
+<script src="/js/update-cart.js" defer></script>
+</head>
+
+<body>
+<%- include("../../shared/includes/header") %>
+<main>
+  <h1>장바구니</h1>
+  <ul id="cart-list">
+    <% for (let item of locals.cart.items) { %>
+    <li>
+      <%- include("includes/cart-item", {item: item}) %>
+    </li>
+    <% } %>
+  </ul>
+  <div class="cart-total">
+    <p>총 가격: <span id="cart-total-price"><%= locals.cart.totalPrice %></span> 원</p>
+    <button class="btn btn-alt">구매하기</button>
+  </div>
+</main>
+<%- include("../../shared/includes/footer") %>

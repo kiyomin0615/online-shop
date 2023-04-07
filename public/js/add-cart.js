@@ -22,7 +22,6 @@ async function addToCart() {
   }
 
   const responseData = response.json(); // json data to javascript object
-  const totalQuantity = responseData.totalQuantity;
 }
 
 addToCartBtnEl.addEventListener("click", addToCart)
