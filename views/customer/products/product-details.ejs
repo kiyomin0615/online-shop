@@ -1,0 +1,19 @@
+<%- include("../../shared/includes/head", {pageTitle: "All Products"}) %>
+<link rel="stylesheet" href="/css/products.css">
+</head>
+
+<body>
+<%- include("../../shared/includes/header") %>
+<main id="product-details">
+  <header>
+    <img src="<%= product.imageURL %>" alt="<%= product.title %>">
+    <div id="products-info">
+      <h1><%= product.title %></h1>
+      <p><%= product.price %> 원</p>
+      <button>장바구니에 추가</button>
+    </div>
+  </header>
+
+  <p id="product-description"><%= product.description %></p>
+</main>
+<%- include("../../shared/includes/footer") %>

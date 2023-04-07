@@ -19,6 +19,7 @@ class Product {
   // 데이터베이스에 저장된 특정 상품 가져오기(by id)
   static async findById(productId) {
     let product;
+
     try {
       product = await database.getDb().collection("products").findOne({_id: new mongodb.ObjectId(productId)});
     } catch (error) {
@@ -34,11 +35,9 @@ class Product {
 
     // Array.map(callback);
     // product(document) to product(Product Class)
-    products.map(function(product) {
+    return products.map(function(product) {
       return new Product(product);
     });
-
-    return products;
   }
 
   // 데이터베이스에 저장
