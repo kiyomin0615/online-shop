@@ -10,6 +10,7 @@ const addCsrfTokenMiddleware = require("./middlewares/add-csrf-token");
 const errorHandlerMiddleware = require("./middlewares/error-handler");
 const checkAuthMiddleware = require("./middlewares/check-auth");
 const protectRoutesMiddleware = require("./middlewares/protect-routes");
+const cartMiddleware = require("./middlewares/cart");
 
 const baseRoutes = require("./routes/base.routes");
 const authRoutes = require("./routes/auth.routes");
@@ -26,9 +27,10 @@ app.use("/products/assets", express.static("product-data"))
 app.use(express.urlencoded({extended: false}));
 
 app.use(expressSession(sessionConfig())); // 세션 생성
-app.use(checkAuthMiddleware); // 해당 유저가 로그인 상태인지 아닌지 확인
+app.use(cartMiddleware); // 유저의 장바구니 생성
 app.use(csrf()); // CSRF 토큰이 없는 POST 요청은 거부한다
 app.use(addCsrfTokenMiddleware); // CSRF 토큰을 전역 변수 res.locals에 저장
+app.use(checkAuthMiddleware); // 해당 유저가 로그인 상태인지 아닌지 확인
 
 app.use(baseRoutes);
 app.use(authRoutes);
