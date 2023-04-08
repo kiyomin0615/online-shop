@@ -2,15 +2,19 @@ const deleteProductBtnEls = document.querySelectorAll(".product-item button");
 
 async function deleteProduct(event) {
   const deleteProductBtnEl = event.target;
-  const productId = deleteProductBtnEl.dataset.productId;
-  const csrfToken = deleteProductBtnEl.dataset.csrfToken;
+  // 설마 data-attribute 대문자 불가능?!
+  const productId = deleteProductBtnEl.dataset.pid;
+  const csrfToken = deleteProductBtnEl.dataset.token;
+
+  console.log(productId);
+  console.log(csrfToken);
 
   // fetch(path, configuration)
-  const res = await fetch(`/admin/product/${productId}/?_csrf=${csrfToken}`, {
+  const response = await fetch(`/admin/products/${productId}?_csrf=${csrfToken}`, {
     method: "DELETE", // DELETE Request
   });
 
-  if (!res.ok) {
+  if (!response.ok) {
     alert("요청에 실패했습니다.");
     return;
   }

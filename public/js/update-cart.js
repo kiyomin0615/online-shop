@@ -6,8 +6,8 @@ async function updateCartItem(event) {
   event.preventDefault();
 
   const formEl = event.target;
-  const productId = formEl.dataset.productId;
-  const csrfToken = formEl.dataset.csrfToken;
+  const productId = formEl.dataset.pid;
+  const csrfToken = formEl.dataset.token;
   const quantity = formEl.children[0].value;
 
   let response;

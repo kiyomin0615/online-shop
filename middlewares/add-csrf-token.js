@@ -1,5 +1,5 @@
 function addCsrfToken(req, res, next) {
-  // CSRF 토큰을 res.locals에 저장
+  // 유저에게 CSRF 토큰 제공(by res.locals)
   res.locals.csrfToken = req.csrfToken();
   next();
 }

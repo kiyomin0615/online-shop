@@ -1,4 +1,5 @@
 const addToCartBtnEl = document.querySelector("#product-details button");
+const badgeEl = document.querySelector(".nav-list .badge");
 
 async function addToCart() {
   let response;
@@ -6,8 +7,8 @@ async function addToCart() {
     response = await fetch("/cart/items", {
       method: "POST",
       body: JSON.stringify({
-        productId: addToCartBtnEl.dataset.productId,
-        _csrf: addToCartBtnEl.dataset.csrfToken
+        productId: addToCartBtnEl.dataset.pid,
+        _csrf: addToCartBtnEl.dataset.token
       }),
       headers: {
         "Content-Type": "application/json" // JSON 데이터 전송
@@ -21,7 +22,10 @@ async function addToCart() {
     alert("요청에 실패했습니다.");
   }
 
-  const responseData = response.json(); // json data to javascript object
+  alert("장바구니에 상품이 추가됐습니다.");
+
+  const responseData = await response.json(); // json to javascript object
+  badgeEl.textContent = responseData.totalQuantity;
 }
 
 addToCartBtnEl.addEventListener("click", addToCart)

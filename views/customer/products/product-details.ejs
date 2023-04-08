@@ -11,7 +11,7 @@
     <div id="products-info">
       <h1><%= product.title %></h1>
       <p><%= product.price %> 원</p>
-      <button class="btn" data-productId="<%= product.id %>" data-csrfToken="<%= locals.csrfToken %>">장바구니에 추가</button>
+      <button class="btn" data-pid="<%= product.id %>" data-token="<%= locals.csrfToken %>">장바구니에 추가</button>
     </div>
   </header>
 

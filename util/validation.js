@@ -11,7 +11,7 @@ function userCredentialsAreValid(email, password) {
   );
 }
 
-// 회원가입 유효성 확인
+// 회원가입 입력 데이터 유효성 확인
 function userDetailsAreValid(email, password, fullname, city, street, postal) {
   return (
     userCredentialsAreValid(email, password) &&
@@ -21,9 +21,9 @@ function userDetailsAreValid(email, password, fullname, city, street, postal) {
   );
 }
 
-// 이메일 유효성 확인
+// 회원가입 확인 이메일 동일한지 확인
 function emailIsConfirmed(email, confirmEmail) {
-  return email === confirmEmail;
+  return (email === confirmEmail);
 }
 
 module.exports = {

@@ -1,7 +1,6 @@
 const Product = require("../models/product.model");
 
-async function getProducts(req, res, next) {
-  // 비동기 에러 처리
+async function getAllProducts(req, res, next) {
   try {
     const products = await Product.findAll();
     res.render("admin/products/all-products", {products: products});
@@ -18,10 +17,9 @@ function getNewProduct(req, res) {
 async function createNewProduct(req, res) {
   const product = new Product({
     ...req.body,
-    image: req.file.filename,
+    image: req.file.filename, // req.file by multer
   });
 
-  // 비동기 에러 처리
   try {
     await product.save();
   } catch (error) {
@@ -35,7 +33,7 @@ async function createNewProduct(req, res) {
 async function getUpdateProduct(req, res, next) {
   try {
     const product = await Product.findById(req.params.id);
-    res.render("/admin/products/update-product", {product: product});
+    res.render("admin/products/update-product", {product: product});
   } catch (error) {
     next(error);
   }
@@ -63,10 +61,9 @@ async function updateProduct(req, res, next) {
 
 async function deleteProduct(req, res, next) {
   let product;
-
   try {
     product = await Product.findById(req.params.id);
-    await product.remove();
+    product.remove();
   } catch (error) {
     next(error);
     return;
@@ -76,7 +73,7 @@ async function deleteProduct(req, res, next) {
 }
 
 module.exports = {
-  getProducts: getProducts,
+  getAllProducts: getAllProducts,
   getNewProduct: getNewProduct,
   createNewProduct: createNewProduct,
   getUpdateProduct: getUpdateProduct,

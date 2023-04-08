@@ -4,6 +4,7 @@ const database = require("../data/database");
 
 class User {
   constructor(email, password, fullname, city, street, postal) {
+    // 유저 객체 프로퍼티
     this.email = email;
     this.password = password;
     this.fullname = fullname;
@@ -14,14 +15,9 @@ class User {
     }
   }
 
-  // 데이터베이스에서 해당 이메일의 유저를 가져오기
-  getUserWithSameEmail() {
-    return database.getDb().collection("users").findOne({email: this.email});
-  }
-
-  // 데이터베이스에서 해당 이메일의 유저가 회원가입 됐는지 확인
+  // 데이터베이스에서 해당 이메일의 유저가 이미 회원가입 됐는지 확인
   async existsAlready() {
-    const existingUser = await this.getUserWithSameEmail()
+    const existingUser = await database.getDb().collection("users").findOne({email: this.email});
     
     if (existingUser) {
       return true;
@@ -29,22 +25,28 @@ class User {
       return false;
     }
   }
-  
-  // 입력한 비밀번호와 데이터베이스에 저장된 비밀번호 비교
-  comparePassword(hashedPassword) {
-    return bcryptjs.compare(this.password, hashedPassword);
+
+  // 데이터베이스에서 해당 이메일의 유저를 가져오기
+  async getUserWithThisEmail() {
+    return await database.getDb().collection("users").findOne({email: this.email});
   }
 
-  // 데이터베이스에 유저 정보 저장
+  // 회원가입
   async signup() {
     const hashedPassword = await bcryptjs.hash(this.password, 12); // Hashing
 
+    // 데이터베이스에 데이터 저장
     await database.getDb().collection("users").insertOne({
       email: this.email,
       password: hashedPassword,
       fullname: this.fullname,
       address: this.address
     });
+  }
+  
+  // 입력한 비밀번호와 데이터베이스에 저장된 비밀번호 비교
+  comparePassword(hashedPassword) {
+    return bcryptjs.compare(this.password, hashedPassword);
   }
 }
 

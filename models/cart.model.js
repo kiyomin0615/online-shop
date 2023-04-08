@@ -1,11 +1,12 @@
 class Cart {
   constructor(items = [], totalQuantity = 0, totalPrice = 0) {
+    // 장바구니 객체 프로퍼티
     this.items = items;
     this.totalQuantity = totalQuantity;
     this.totalPrice = totalPrice;
   }
 
-  // 장바구니 데이터를 유저의 세션에 저장
+  // 장바구니에 상품 추가
   addItem(product) {
     const cartItem = {
       product: product,
@@ -34,6 +35,7 @@ class Cart {
     this.totalPrice += product.price;
   }
 
+  // 장바구니의 상품 수량 변경
   updateItem(productId, newQuantity) {
     for (let i = 0; i < this.items.length; i++) {
       const item = this.items[i];
