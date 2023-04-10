@@ -1,0 +1,35 @@
+<article class="order-item">
+  <header class="order-summary">
+    <h2><span class="order-item-price"><%= order.productData.totalPrice %> 원</span> - <%= order.date.getFullYear() %>년 <%= order.date.getMonth() %>월 <%= order.date.getDate() %>일</h2>
+    <p><span class="badge"><%= order.status %></span></p>
+  </header>
+
+  <section class="order-details">
+    <% if (locals.isAdmin) { %>
+      <address>
+        <p><a href="mailto:<%= order.userData.email %>"><%= order.userData.name %></a></p>
+        <p><%= order.userData.address.street %> (<%= order.userData.address.postal %> <%= order.userData.address.city %>)</p>
+      </address>
+    <% } %>
+    <ul>
+      <% for (let item of order.productData.items) { %>
+        <li><%= item.product.title %> - <%= item.totalPrice %> 원 (<%= item.product.price %> 원 x <%= item.quantity %>)</li>
+      <% } %>
+    </ul>
+  </section>
+
+  <% if (locals.isAdmin) { %>
+    <section class="order-actions">
+      <form>
+        <input type="hidden" name="_csrf" value="<%= locals.csrfToken %>">
+        <input type="hidden" name="orderId" value="<%= order.id %>">
+        <select name="status">
+          <option value="pending" <% if (order.status === "대기") { %>selected<% } %>>대기</option>
+          <option value="fulfilled" <% if (order.status === "성공") { %>selected<% } %>>성공</option>
+          <option value="cancelled" <% if (order.status === "취소") { %>selected<% } %>>취소</option>
+        </select>
+        <button class="btn btn-alt">변경</button>
+      </form>
+    </section>
+  <% } %>
+</article>

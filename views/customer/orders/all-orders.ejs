@@ -1,10 +1,12 @@
-<%- include("../../shared/includes/head", {pageTitle: "Order"}) %>
-<link rel="stylesheet" href="/css/products.css">
+<%- include("../../shared/includes/head", {pageTitle: "Orders List"}) %>
+<link rel="stylesheet" href="/css/orders.css">
+<script src="/js/order-management.js" defer></script>
 </head>
 
 <body>
 <%- include("../../shared/includes/header") %>
 <main>
-  <h1>주문 페이지</h1>
+  <h1>주문 리스트</h1>
+  <%- include("../../shared/includes/order-list", {orders: orders}) %>
 </main>
 <%- include("../../shared/includes/footer") %>

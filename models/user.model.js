@@ -27,7 +27,8 @@ class User {
     }
   }
 
-  static async findUserById(userId) {
+  // 아이디로 유저 찾기
+  static async findById(userId) {
     const uid = new mongodb.ObjectId(userId);
 
     return database.getDb().collection("users").findOne({_id: uid}, {projection: {password: 0}});
