@@ -1,4 +1,5 @@
 const bcryptjs = require("bcryptjs");
+const mongodb = require("mongodb");
 
 const database = require("../data/database");
 
@@ -24,6 +25,12 @@ class User {
     } else {
       return false;
     }
+  }
+
+  static async findUserById(userId) {
+    const uid = new mongodb.ObjectId(userId);
+
+    return database.getDb().collection("users").findOne({_id: uid}, {projection: {password: 0}});
   }
 
   // 데이터베이스에서 해당 이메일의 유저를 가져오기

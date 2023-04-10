@@ -14,9 +14,16 @@
     </li>
     <% } %>
   </ul>
-  <div class="cart-total">
+  <div id="cart-total">
     <p>총 가격: <span id="cart-total-price"><%= locals.cart.totalPrice %></span> 원</p>
-    <button class="btn btn-alt">구매하기</button>
+    <% if (locals.isAuth) { %>
+      <form action="/orders" method="POST">
+        <input type="hidden" name="_csrf" value="<%= locals.csrfToken %>">
+        <button class="btn btn-alt">구매하기</button>
+      </form>
+    <% } else { %>
+      <p id="cart-total-fallback">구매하기 위해서는 로그인 해주세요.</p>
+    <% } %>
   </div>
 </main>
 <%- include("../../shared/includes/footer") %>
